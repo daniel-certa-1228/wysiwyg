@@ -8,9 +8,13 @@ function personInfo(image, name, bio, lifespan) {
 	this.Lifespan = lifespan;
 }
 
+function clearText(element) {
+  element.value = '';
+}
+
 //array to hold famous people
 var peopleStorage = [];
-console.log( "peopleStorage", peopleStorage );
+// console.log( "peopleStorage", peopleStorage );
 
 //constructions
 peopleStorage.push(new personInfo("img/colonel-sanders.jpg", "Colonel Sanders", "Colonel Harland David Sanders was an American businessman, best known for founding fast food chicken restaurant chain Kentucky Fried Chicken (now known as KFC) and later acting as the company's brand ambassador and symbol. His name and image are still symbols of the company.", "September 9, 1890 – December 16, 1980"))
@@ -20,29 +24,80 @@ peopleStorage.push(new personInfo("img/Helen-Forrest.jpg", "Helen Forrest", "Hel
 peopleStorage.push(new personInfo("img/jpertwee.jpg", "Jon Pertwee", "John Pertwee was an English actor, entertainer and cabaret performer.  Pertwee starred as the Third Doctor in the science-fiction series <em>Doctor Who</em> between 1970 and 1974, and also spent 18 years (1959–1977) playing Chief petty officer Pertwee in <em>The Navy Lark</em> on BBC Radio. He later played the title character in the series <em>Worzel Gummidge</em> from 1979 to 1981, and again from 1987 to 1989.", "July 7, 1919 – May 20, 1996"))
 peopleStorage.push(new personInfo("img/randy.jpg", "Randy Rhoads", "Randall William Rhoads was an American heavy metal guitarist who played with Ozzy Osbourne and Quiet Riot. A devoted student of classical guitar, Rhoads combined his classical music influences with his own heavy metal style. He died in a plane accident while on tour with Osbourne in Florida in 1982.", "December 6, 1956 – March 19, 1982"))
 
+//for loop to pull the object data and spit it out to the DOM.
 for (var i = 0; i < peopleStorage.length; i++) {
 
 	let personPic = peopleStorage[i].Image;
 	let personName = peopleStorage[i].Name;
 	let personBio = peopleStorage[i].Bio;
 	let personLifespan = peopleStorage[i].Lifespan;
-	// let personLength = peopleStorage.length;
 
 	let peopleCard = `<article class="person-card" id="perCard--${i}">
+					  <div class="image-holder">
 					  <img class="person-img" id="pic--${i}" src="${personPic}">
+					  </div>
 					  <header class="card-header" id="header--${i}">
-					  <h3 class="person-headline">${personName}</h3>
+					  <h3 class="person-headline" id="person-h3--${i}">${personName}</h3>
 					  </header>
 					  <section class="card-bio" id="bio--${i}">
-					  <p class="person-bio">${personBio}</p>
+					  <p class="person-bio" id="bio-p--${i}">${personBio}</p>
 					  </section>
-					  <footer class="card-footer" id="footer--${i}"><p class="person-lifespan">${personLifespan}</p></footer>
+					  <footer class="card-footer" id="footer--${i}"><p class="person-lifespan" id="lifespan-p--${i}">${personLifespan}</p></footer>
 					  </article>`
 
 	// console.log( "peopleCard", peopleCard );
-
 	let personHolder = document.getElementById("person-container");
 	// console.log( "personHolder", personHolder );
 	personHolder.innerHTML += peopleCard;
-
 };
+
+
+//Event bubbler to determine what was clicked and process it. 
+document.getElementById("person-container").addEventListener("click", (event) => {
+	let target = event.target;
+	// let targetID = target.id;
+	let personSelect = target.closest("article");
+	let personBioType = personSelect.childNodes[5].childNodes[1];
+	// console.log( "personSelect", personSelect );
+	// console.log( "personBioType", personBioType );
+	// console.log( "target", target );
+	// console.log( "targetID", targetID );
+
+	//add border to selected element
+	target.classList.toggle("border")
+	//add focus to text input
+	let textInput = document.getElementById("main-input");
+	textInput.focus()
+	//add typing to bio area
+	textInput.addEventListener("keyup", (event) => {
+		let typing = event.target.value;
+		personBioType.innerHTML = typing;
+		// console.log( "typing", typing );
+		if (event.keyCode === 13) {
+			clearText(textInput);
+		}
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
