@@ -5,4 +5,67 @@ body {
 
 label {
 	font-weight: bold;
+	margin-bottom: 1em;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.person-card:nth-child(odd) {
+	background-color: lightyellow;
+}
+
+.person-card:nth-child(even) {
+	background-color: lightblue;
+}
+
+.person-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	/*max-width: 33%;*/
+	flex-basis: 30%;
+	min-width: 250px;
+	flex-grow: 1;
+	margin: 1em 1em 0;
+	position: relative;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75)
+}
+
+
+.person-img {
+	width: 100%;
+}
+
+.card-header {
+	text-align: center;
+}
+
+.person-headline {
+	display: inline-block;
+	padding: .5em;
+	margin: .5em auto 0;
+}
+
+.person-bio {
+	padding: .5em;
+	margin: 0 0 40px;
+}
+
+.card-footer {
+	position: absolute;
+	bottom: 0;
+}
+
+.person-lifespan {
+	padding: .5em;
+	font-size: .8em;
+	font-weight: bold;
+	align-self: flex-end;
 }

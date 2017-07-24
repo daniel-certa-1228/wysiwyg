@@ -20,20 +20,23 @@ peopleStorage.push(new personInfo("img/Helen-Forrest.jpg", "Helen Forrest", "Hel
 peopleStorage.push(new personInfo("img/jpertwee.jpg", "Jon Pertwee", "John Pertwee was an English actor, entertainer and cabaret performer.  Pertwee starred as the Third Doctor in the science-fiction series <em>Doctor Who</em> between 1970 and 1974, and also spent 18 years (1959–1977) playing Chief petty officer Pertwee in <em>The Navy Lark</em> on BBC Radio. He later played the title character in the series <em>Worzel Gummidge</em> from 1979 to 1981, and again from 1987 to 1989.", "July 7, 1919 – May 20, 1996"))
 peopleStorage.push(new personInfo("img/randy.jpg", "Randy Rhoads", "Randall William Rhoads was an American heavy metal guitarist who played with Ozzy Osbourne and Quiet Riot. A devoted student of classical guitar, Rhoads combined his classical music influences with his own heavy metal style. He died in a plane accident while on tour with Osbourne in Florida in 1982.", "December 6, 1956 – March 19, 1982"))
 
-for (i = 0; i < peopleStorage.length; i++) {
+for (var i = 0; i < peopleStorage.length; i++) {
 
 	let personPic = peopleStorage[i].Image;
 	let personName = peopleStorage[i].Name;
 	let personBio = peopleStorage[i].Bio;
 	let personLifespan = peopleStorage[i].Lifespan;
+	// let personLength = peopleStorage.length;
 
-	let peopleCard = `<article class="person-card">
-					  <img class="person-img" src="${personPic}">
-					  <header>
-					  <h3 class=""person-headlin>${personName}</h3>
+	let peopleCard = `<article class="person-card" id="perCard--${i}">
+					  <img class="person-img" id="pic--${i}" src="${personPic}">
+					  <header class="card-header" id="header--${i}">
+					  <h3 class="person-headline">${personName}</h3>
 					  </header>
+					  <section class="card-bio" id="bio--${i}">
 					  <p class="person-bio">${personBio}</p>
-					  <footer><p class="person-lifespan">${personLifespan}</p></footer>
+					  </section>
+					  <footer class="card-footer" id="footer--${i}"><p class="person-lifespan">${personLifespan}</p></footer>
 					  </article>`
 
 	// console.log( "peopleCard", peopleCard );
