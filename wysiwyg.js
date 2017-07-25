@@ -51,35 +51,36 @@ for (var i = 0; i < peopleStorage.length; i++) {
 	personHolder.innerHTML += peopleCard;
 };
 
-
+////////////////////////////////////////////////////////////////
+// variable to store the bio element of the selected person
+let personBioType = "";
 //Event bubbler to determine what was clicked and process it. 
 document.getElementById("person-container").addEventListener("click", (event) => {
-	let target = event.target;
-	// let targetID = target.id;
-	let personSelect = target.closest("article");
-	let personBioType = personSelect.childNodes[5].childNodes[1];
-	// console.log( "personSelect", personSelect );
+	let clickTarget = event.target;
+	let personSelect = clickTarget.closest("article");
+	//set the variable to be the bio element
+	personBioType = personSelect.childNodes[5].childNodes[1];
 	// console.log( "personBioType", personBioType );
-	// console.log( "target", target );
-	// console.log( "targetID", targetID );
-
 	//add border to selected element
-	target.classList.toggle("border")
+	clickTarget.classList.toggle("border")
 	//add focus to text input
-	let textInput = document.getElementById("main-input");
 	textInput.focus()
-	//add typing to bio area
+});
+
+//grab the text input from the DOM and store in a variable
+
+let textInput = document.getElementById("main-input");
+
 	textInput.addEventListener("keyup", (event) => {
+		//capture the typing;
 		let typing = event.target.value;
+		//set the inner HTML of the bio element to the user typing
 		personBioType.innerHTML = typing;
-		// console.log( "typing", typing );
+		//set return key to clear input;
 		if (event.keyCode === 13) {
 			clearText(textInput);
 		}
 	});
-});
-
-
 
 
 
